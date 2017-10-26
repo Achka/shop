@@ -1,0 +1,21 @@
+label{
+    text-align: right;
+}
+form{
+    margin-top: 100px;
+}
+img{
+    width:150px;
+    height: 130px;
+    position: absolute;
+    left:45%;
+    top:110px;
+    z-index:10;
+    overflow-x: hidden;
+}
+
+@media (max-width:765px){
+    img{
+        display:none;
+    }
+}

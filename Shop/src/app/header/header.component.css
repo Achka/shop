@@ -1,0 +1,25 @@
+.header-text{
+    text-align: center;
+    font-size: 40px;
+}
+img{
+    height:100px;
+    width:150px;
+    
+    
+    position: absolute ;
+    left:0;
+    top:0;
+}
+@media (max-width:765px){
+    img{
+        position: relative;
+    }
+    .page-header{
+       margin-top: 0;
+       text-align: center;
+    }
+    .header-text{
+        font-size: 25px;
+    }
+}
