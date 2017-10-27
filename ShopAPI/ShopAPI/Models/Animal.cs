@@ -14,6 +14,6 @@ namespace ShopAPI.Models
         public double Age { get; set; }
         public string Description { get; set; }
 
-      //  public AnimalPhoto AnimalPhoto { get; set; }
+        public AnimalPhoto AnimalPhoto { get; set; }
     }
 }

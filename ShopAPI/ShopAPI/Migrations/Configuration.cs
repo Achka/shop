@@ -7,7 +7,6 @@ namespace ShopAPI.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
     using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
 
     internal sealed class Configuration : DbMigrationsConfiguration<ShopAPI.Models.ApplicationDbContext>
     {
@@ -51,17 +50,14 @@ namespace ShopAPI.Migrations
             //}
 
 
-            //context.Animals.AddOrUpdate(a => a.AnimalId,
-            //    new Animal
-            //    {
-            //        Breed = "Cat",
-            //        Age = 1,
-            //        Description = "Very nice cat",
-            //        AnimalPhoto = new AnimalPhoto
-            //        {
-            //            URL = "123",
-            //        }
-            //    });
+            context.Animals.AddOrUpdate(a => a.AnimalId,
+                new Animal
+                {
+                    Breed = "Cat",
+                    Age = 1,
+                    Description = "Very nice cat",
+                    AnimalPhoto = null,
+                });
         }
     }
 }

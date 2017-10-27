@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { ImagesComponent } from './images/images.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { AnimalService } from './services/animal.service';
+import { ItemComponent } from './item/item.component';
 const appRoutes: Routes = [
   { 
     path: 'login', 
@@ -32,7 +33,8 @@ const appRoutes: Routes = [
     HeaderComponent,
     LoginComponent,
     ImagesComponent,
-    ItemListComponent
+    ItemListComponent,
+    ItemComponent
   ],
   imports: [
     BrowserModule,

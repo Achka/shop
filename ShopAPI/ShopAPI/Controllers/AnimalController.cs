@@ -25,5 +25,28 @@ namespace ShopAPI.Controllers
             return unitOfWork.AnimalRepository.GetAll().ToList();
         }
 
+
+        [HttpPost]
+        [Route("api/Animal/Update")]
+        public void Update(Animal animal)
+        {
+            unitOfWork.AnimalRepository.Update(animal);
+            unitOfWork.Save();
+        }
+
+        [HttpDelete]
+        public void Delete(int id)
+        {
+            unitOfWork.AnimalRepository.Delete(id);
+            unitOfWork.Save();
+        }
+
+        [HttpPost]
+        [Route("api/Animal/Add")]
+        public void Add(Animal animal)
+        {
+            unitOfWork.AnimalRepository.Create(animal);
+            unitOfWork.Save();
+        }
     }
 }
