@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Animal } from '.././models/animal';
+import { User } from '.././models/user';
 import { HttpVariables } from '.././globals/http';
 import { Http, Headers,RequestOptions,Response} from '@angular/http';
 import { Observable } from 'rxjs';
@@ -7,8 +8,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 @Injectable()
-export class AnimalService {
-    animals:Animal[];
+export class UserService{
     globals: HttpVariables;
     token: string;
     options :RequestOptions; 
@@ -17,30 +17,22 @@ export class AnimalService {
         this.token = localStorage.getItem("token");
         this.options = new RequestOptions({ headers: this.globals.getAuthorizationHeader(this.token) });
     }
-    getAllAnimals():Observable<Animal[]>{
- 
-
+    getcCurrentUser():Observable<User>{
         return this.http
-        .get(this.globals.url+ '/api/Animal',this.options).map(function(res:Response)
+        .get(this.globals.url+ '/api/Account/CurrentUser',this.options).map(function(res:Response)
         {let body = res.json();
             console.log(body);
             return body || {};
         });
     }
 
-    updateAnimal(animal:Animal){
-        return this.http.post(this.globals.url+'/api/Animal/Update',animal,this.options).map(function(resp:Response){
+    addAnimal(animal:Animal){
+        return this.http.post(this.globals.url+'/api/Account/AddAnimal',animal,this.options).map(function(resp:Response){
             return resp.json();
         });
+    }
+    deleteAnimal(animal:Animal){
+        return this.http.post(this.globals.url+'/api/Account/RemoveFromCart',animal,this.options).map(()=>{});
     }
     
-    deleteAnimal(id:number){
-        return this.http.delete(this.globals.url+'/api/Animal/'+id,this.options).map(function(resp:Response){
-            return resp.json();});
-    }
-    addAnimal(animal:Animal){
-        return this.http.post(this.globals.url+'/api/Animal/Add',animal,this.options).map(function(resp:Response){
-            return resp.json();
-        });
-    }
 }

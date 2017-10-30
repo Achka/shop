@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using ShopAPI.Models;
 using ShopAPI.Providers;
 using ShopAPI.Results;
+using ShopAPI.Interfaces;
 
 namespace ShopAPI.Controllers
 {
@@ -23,17 +24,21 @@ namespace ShopAPI.Controllers
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
+        private IUnitOfWork unitOfWork;
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
-        public AccountController()
+        public AccountController(IUnitOfWork unitOfWork)
         {
+            this.unitOfWork = unitOfWork;
         }
 
         public AccountController(ApplicationUserManager userManager,
-            ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+            ISecureDataFormat<AuthenticationTicket> accessTokenFormat,
+            IUnitOfWork unitOfWork):this(unitOfWork)
         {
             UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
+            
         }
 
         public ApplicationUserManager UserManager
@@ -64,7 +69,28 @@ namespace ShopAPI.Controllers
                 LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
             };
         }
-
+        [HttpPost]
+        [Route("AddAnimal")]
+        public void AddAnimal(Animal animal)
+        {
+            unitOfWork.UserRepository.Get(User.Identity.GetUserId()).Animals.Add(animal);
+            unitOfWork.Save();
+        }
+        [HttpGet]
+        [Route("CurrentUser")]
+        public ApplicationUser CurrentUser()
+        {
+            return unitOfWork.UserRepository.Get(User.Identity.GetUserId());
+        }
+        [HttpPost]
+        [Route("RemoveFromCart")]
+        public void RemoveFromCart(Animal animal)
+        {
+            unitOfWork.UserRepository.Get(User.Identity.GetUserId()).Animals.Remove(animal);
+            unitOfWork.Save();
+            unitOfWork.UserRepository.Update(unitOfWork.UserRepository.Get(User.Identity.GetUserId()));
+            unitOfWork.Save();
+        }
         // POST api/Account/Logout
         [Route("Logout")]
         public IHttpActionResult Logout()

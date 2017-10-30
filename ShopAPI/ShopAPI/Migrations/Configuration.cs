@@ -31,23 +31,19 @@ namespace ShopAPI.Migrations
             //    );
             //
 
-            //var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
+            var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
 
-            //var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
-            //// create admin role
-            //var adminRole = new IdentityRole { Name = "admin" };
+            // create admin role
+            
 
-            //// add this roles to DB
-            //roleManager.Create(adminRole);
-            //var admin = new ApplicationUser { Email = "andriana@gmail.com", UserName = "andriana@gmail.com" };
-            //string password = "Password123456!";
-            //var result = userManager.Create(admin, password);
-            //if (result.Succeeded)
-            //{
-            //    // add role to him
-            //    userManager.AddToRole(admin.Id, adminRole.Name);
-            //}
+            // add this roles to DB
+         
+            var admin = new ApplicationUser { Email = "andriana1@gmail.com", UserName = "andriana1@gmail.com" };
+            string password = "Password123456!";
+            var result = userManager.Create(admin, password);
+            
 
 
             context.Animals.AddOrUpdate(a => a.AnimalId,

@@ -3,16 +3,21 @@
   <img *ngIf="animal.AnimalPhoto===null" src='.././assets/images/default.png'/>
   <img *ngIf="animal.AnimalPhoto!==null" src='{{animal.AnimalPhoto.URL}}'/>
   <span>Breed:</span><span>{{animal.Breed}} </span>  
-  {{animal.Description}}
-  <div class='icons' id="123">
-
-    
-    <button type="button" class="btn btn-info " data-toggle="modal" attr.data-target=#Edit{{animal.AnimalId}}>
-      <span class="glyphicon glyphicon-pencil"></span>
-    </button>
-    <button type="button" class="btn btn-info " data-toggle="modal" attr.data-target=#Remove{{animal.AnimalId}}>
-      <span class="glyphicon glyphicon-remove"></span>     
-    </button>
+  <span>Description:</span><span>{{animal.Description}} </span>  
+  <span>Price:</span><span>{{animal.Price}} </span>  
+  <div class='icons'>
+     <button type="button" class="btn btn-info " data-toggle="modal" (click)="add()">
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+    <div *ngIf="currentUser.Roles.length !== 0">
+      <button type="button" class="btn btn-info " data-toggle="modal" attr.data-target=#Edit{{animal.AnimalId}}>
+        <span class="glyphicon glyphicon-pencil"></span>
+      </button>
+      <button type="button" class="btn btn-info " data-toggle="modal" attr.data-target=#Remove{{animal.AnimalId}}>
+        <span class="glyphicon glyphicon-remove"></span>     
+      </button>
+    </div>
+  </div>
 
     <div attr.id=Edit{{animal.AnimalId}} class="modal fade" role="dialog" #modal>
       <div class="modal-dialog">
@@ -36,11 +41,18 @@
                     </div>
                   </div>
                   <div class="form-group row">
+                    <label for="inputPrice" class="col-sm-4 col-form-label">Price</label>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control"   value={{this.animal.Price}} [(ngModel)]="this.animal.Price" name="price">
+                    </div>
+                  </div>
+                  <div class="form-group row">
                     <div class="col-sm-4"></div>
                     <div class="col-sm-6">
                       <button type="submit" class="btn btn-primary" >Edit</button>
                     </div>
                   </div>
+                  
                 </form>
               </div>
         </div>
@@ -68,5 +80,4 @@
         </div>
       </div> 
   </div>
-</div>
 </div>

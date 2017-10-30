@@ -5,6 +5,7 @@ export class Animal{
         this.Breed = "";
         this.Description ="";
         this.Age = 0;
+        this.Price = 0;
       
     }
     AnimalId: number;
@@ -12,4 +13,5 @@ export class Animal{
     Age: number;
     Description: string;
     AnimalPhoto: Photo;
+    Price: number;
 }

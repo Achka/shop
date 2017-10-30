@@ -10,6 +10,7 @@ namespace ShopAPI.Interfaces
     public interface IUnitOfWork
     {
         IRepository<Animal> AnimalRepository { get; }
+        IRepository<ApplicationUser> UserRepository { get; }
         void Save();
     }
 }

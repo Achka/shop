@@ -10,7 +10,9 @@ import { LoginComponent } from './login/login.component';
 import { ImagesComponent } from './images/images.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { AnimalService } from './services/animal.service';
+import { UserService } from './services/user.service';
 import { ItemComponent } from './item/item.component';
+import { RegisterComponent } from './register/register.component';
 const appRoutes: Routes = [
   { 
     path: 'login', 
@@ -20,6 +22,10 @@ const appRoutes: Routes = [
     path: 'shop',
     component: ItemListComponent
   },
+  {
+    path:'register',
+    component: RegisterComponent
+  }
   // { path: '**',
   //   redirectTo: '/shop',
   //   pathMatch: 'full'
@@ -34,7 +40,8 @@ const appRoutes: Routes = [
     LoginComponent,
     ImagesComponent,
     ItemListComponent,
-    ItemComponent
+    ItemComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +52,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [AnimalService],
+  providers: [AnimalService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

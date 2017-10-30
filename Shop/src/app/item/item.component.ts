@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Animal } from '../models/animal';
+import { User } from '../models/user';
 import { AnimalService } from '../services/animal.service';
+import { UserService } from '../services/user.service';
 import { NgForm} from '@angular/forms';
 import { Router} from '@angular/router';
 @Component({
@@ -10,21 +12,23 @@ import { Router} from '@angular/router';
 })
 export class ItemComponent implements OnInit {
   @Input() animal: Animal;
-  constructor(private animalService: AnimalService, private router:Router) {}
+  @Input() currentUser:User;
+  constructor(private animalService: AnimalService, private router:Router, private userService: UserService) {}
 
   ngOnInit() {
     console.log(this.animal);
+    console.log(this.currentUser);
   }
 
   onSubmit(editForm : NgForm){
-   console.log(this.animal); 
-   
-   this.animalService.updateAnimal(this.animal).subscribe();
+   this.animalService.updateAnimal(this.animal).subscribe(()=>location.reload());
   
   }
   yesClicked(){
-    this.animalService.deleteAnimal(this.animal.AnimalId).subscribe();
+    this.animalService.deleteAnimal(this.animal.AnimalId).subscribe(()=>location.reload());  
+  }
 
-    location.reload();
+  add(){
+    this.userService.addAnimal(this.animal).subscribe(()=>location.reload()); 
   }
 }

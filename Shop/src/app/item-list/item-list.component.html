@@ -1,10 +1,52 @@
 <div class="panel panel-default">
-    <button type="button" class="btn btn-info btn-lg btn-block" data-toggle="modal" data-target="#add-modal">
+  <button type="button" class="btn btn-info btn-lg shopping" data-toggle="modal" data-target="#cart-modal" [disabled]="currentUser.Animals.length==0">
+    <span class="glyphicon glyphicon-shopping-cart" ></span>
+    <span>{{currentUser.Animals.length}}</span>
+  </button>
+  <button type="button" class="btn btn-info btn-lg log-out" (click)="logOut()">
+    <span class="glyphicon glyphicon-log-out"></span>
+  </button>
+    <button *ngIf="currentUser.Roles.length !==0" type="button" class="btn btn-info btn-lg btn-block" data-toggle="modal" data-target="#add-modal" >
         <span class="glyphicon glyphicon-plus-sign"></span>
     </button>
-    <div  *ngFor="let animal of this.animals">
-        <app-item [animal]='animal'></app-item>
+    <div *ngFor="let animal of this.animals">
+        <app-item [animal]='animal' [currentUser]='currentUser'></app-item>
     </div>
+    <div id="cart-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Cart</h4>
+                </div>
+                <div class="modal-body">
+                        <div *ngFor='let animal of currentUser.Animals'>
+                           <div class="alert alert-info">
+                              <span>Breed:</span><span>{{animal.Breed}} </span>  
+                              <span>Description:</span><span>{{animal.Description}} </span>  
+                              <span>Price:</span><span>{{animal.Price}} </span>  
+                              <div class="remove">
+                                <button type="button" class="btn btn-info" (click)="removeItem(animal)">
+                                  <span class="glyphicon glyphicon-remove"></span>     
+                                </button>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="form-group row">
+                          <div class="col-sm-4"></div>
+                          <div class="col-sm-4">
+                            <button type="button" class="btn btn-success" >Buy</button>
+                          </div>
+                          <div class="col-sm-4">
+                            <span>Price:</span><span>{{this.price}} </span>  
+                          </div>
+                        </div>
+                             
+                </div>
+              </div>
+      
+            </div>
+          </div>   
 
     <div id="add-modal" class="modal fade" role="dialog">
             <div class="modal-dialog">

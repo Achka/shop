@@ -4,6 +4,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace ShopAPI.Models
 {
@@ -17,6 +19,7 @@ namespace ShopAPI.Models
             // Add custom user claims here
             return userIdentity;
         }
+        public ICollection<Animal> Animals { get; set; } = new List<Animal>();
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

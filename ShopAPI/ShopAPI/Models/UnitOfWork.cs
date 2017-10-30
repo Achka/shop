@@ -11,9 +11,12 @@ namespace ShopAPI.Models
         private ApplicationDbContext context;
         public IRepository<Animal> AnimalRepository { get; }
 
-        public UnitOfWork(ApplicationDbContext context, IRepository<Animal> animalRepository)
+        public IRepository<ApplicationUser> UserRepository { get; }
+
+        public UnitOfWork(ApplicationDbContext context, IRepository<Animal> animalRepository, IRepository<ApplicationUser> userRepository)
         {
             this.AnimalRepository = animalRepository;
+            this.UserRepository = userRepository;
             this.context = context;
         }
 
